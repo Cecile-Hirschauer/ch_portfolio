@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+storybook-static/
+*.tsbuildinfo
+.turbo/
+.vercel/
+.env
+.env.*

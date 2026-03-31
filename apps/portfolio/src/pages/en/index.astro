@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { en } from "@cecile/content";
+import { meta } from "@cecile/content";
+
+const t = en;
+---
+
+<BaseLayout title={meta.title} description={meta.description.en} lang="en">
+  <main>
+    <section id="hero">
+      <h1>{t.hero.tagline}</h1>
+      <p>{t.hero.pitch}</p>
+    </section>
+
+    <section id="manifesto">
+      <h2>{t.manifesto.heading}</h2>
+    </section>
+
+    <section id="timeline">
+      <h2>{t.timeline.heading}</h2>
+      <p>{t.timeline.subtitle}</p>
+    </section>
+
+    <section id="stack">
+      <h2>{t.stack.heading}</h2>
+    </section>
+
+    <section id="projects">
+      <h2>{t.projects.heading}</h2>
+    </section>
+
+    <section id="craft">
+      <h2>{t.craft.heading}</h2>
+    </section>
+
+    <section id="contact">
+      <h2>{t.contact.heading}</h2>
+      <p>{t.contact.availability}</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>{t.footer.weight}</p>
+  </footer>
+</BaseLayout>

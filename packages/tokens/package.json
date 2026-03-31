@@ -1,0 +1,20 @@
+{
+  "name": "@cecile/tokens",
+  "version": "1.0.0",
+  "description": "Design tokens for Cecile portfolio",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./tokens.css": "./dist/tokens.css"
+  },
+  "scripts": {
+    "build": "tsc && tsx scripts/build-css.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/"
+  },
+  "license": "ISC"
+}
