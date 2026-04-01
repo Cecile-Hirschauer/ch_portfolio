@@ -67,3 +67,25 @@ ComponentName/
 - `pnpm lint` — Lint all packages
 - `pnpm typecheck` — TypeScript check all packages
 - `pnpm build` — Build everything
+
+## Deployment (Vercel)
+Two separate Vercel projects on the same GitHub repo with selective deploys:
+
+### Portfolio (`apps/portfolio`)
+- Framework: Astro | Root Directory: `apps/portfolio`
+- Build/Output/Install: Vercel defaults
+- Ignored Build Step: `npx turbo-ignore portfolio`
+- Node.js: 22.x
+
+### Storybook (`packages/ui`)
+- Framework: Other | Root Directory: *(repo root)*
+- Build Command: `pnpm turbo run build-storybook --filter=@cecile/ui`
+- Output Directory: `packages/ui/storybook-static`
+- Ignored Build Step: `npx turbo-ignore @cecile/ui`
+- Node.js: 22.x
+
+### Selective deploy behavior
+- Portfolio-only changes → only portfolio deploys
+- UI/Storybook changes → only storybook deploys
+- Token/content changes → both deploy (shared dependencies)
+- If pnpm version mismatch on Vercel: set env var `ENABLE_EXPERIMENTAL_COREPACK=1`
