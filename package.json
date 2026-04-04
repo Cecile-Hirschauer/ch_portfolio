@@ -9,6 +9,7 @@
     "lint": "turbo lint",
     "typecheck": "turbo typecheck",
     "storybook": "turbo storybook --filter=@cecile/ui",
+    "test:e2e": "turbo test:e2e --filter=portfolio",
     "format": "prettier --write ."
   },
   "packageManager": "pnpm@10.33.0",

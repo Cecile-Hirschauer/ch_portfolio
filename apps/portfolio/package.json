@@ -8,7 +8,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "typecheck": "astro check",
-    "lint": "eslint --no-error-on-unmatched-pattern src/"
+    "lint": "eslint --no-error-on-unmatched-pattern src/",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "astro": "^5.7.10",
@@ -19,6 +21,10 @@
     "@cecile/content": "workspace:*",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
+    "@playwright/test": "^1.51.1"
   },
   "license": "ISC"
 }
