@@ -30,11 +30,21 @@ ComponentName/
 
 ## Testing Philosophy
 - TDD when possible: write test first, then implement
-- Vitest + React Testing Library for unit/integration
 - Test behavior, not implementation details
 - Every component must have at least: rendering test, a11y test, key interaction test
 - Storybook addon-a11y for automated WCAG checks
 - Lighthouse CI in GitHub Actions for performance + accessibility audits
+
+### Testing Stack
+- **Unit / Integration (packages/ui)** — Vitest + React Testing Library + `@testing-library/user-event` + `happy-dom`
+  - Config: `packages/ui/vitest.config.ts` (environment: happy-dom)
+  - Setup: `packages/ui/vitest.setup.ts` (imports jest-dom matchers)
+- **Integration (packages/content, packages/tokens)** — Vitest (environment: node)
+  - Config: `packages/{content,tokens}/vitest.config.ts`
+- **E2E (apps/portfolio)** — Playwright + `@axe-core/playwright`
+  - Config: `apps/portfolio/playwright.config.ts`
+  - Browsers: Chromium only in CI; Chromium + Firefox + WebKit locally
+  - Tests live in `apps/portfolio/tests/`
 
 ## Content Management
 - Content lives in `packages/content` as typed TS objects
@@ -60,10 +70,15 @@ ComponentName/
 - SVG icons preferred over icon fonts
 - No unnecessary JavaScript — use Astro islands only where interactivity is required
 
+## Pre-PR Checklist
+Before opening or updating a PR, run `/pre-pr` to execute all quality gates in order:
+lint → typecheck → test → build. All must pass before pushing.
+
 ## Package Scripts
 - `pnpm dev` — Start Astro dev server
 - `pnpm storybook` — Start Storybook
-- `pnpm test` — Run all tests
+- `pnpm test` — Run all Vitest tests (unit + integration, all packages)
+- `pnpm test:e2e` — Run Playwright E2E tests (apps/portfolio)
 - `pnpm lint` — Lint all packages
 - `pnpm typecheck` — TypeScript check all packages
 - `pnpm build` — Build everything

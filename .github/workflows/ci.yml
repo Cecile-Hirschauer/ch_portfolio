@@ -38,6 +38,39 @@ jobs:
       - name: Build
         run: pnpm turbo build
 
+  e2e:
+    name: E2E tests (Playwright)
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: pnpm --filter portfolio exec playwright install --with-deps chromium
+
+      - name: Build site
+        run: pnpm turbo build --filter=portfolio
+
+      - name: Run E2E tests
+        run: pnpm --filter portfolio test:e2e
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: apps/portfolio/playwright-report/
+          retention-days: 7
+
   a11y:
     name: Accessibility audit
     runs-on: ubuntu-latest
