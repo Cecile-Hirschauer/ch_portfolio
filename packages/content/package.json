@@ -16,8 +16,13 @@
   },
   "scripts": {
     "build": "tsc",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/"
+  },
+  "devDependencies": {
+    "vitest": "^3.1.1"
   },
   "license": "ISC"
 }
